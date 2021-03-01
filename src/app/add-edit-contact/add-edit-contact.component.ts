@@ -7,7 +7,6 @@ import {SharedService} from 'src/app/shared.service';
   styleUrls: ['./add-edit-contact.component.css']
 })
 export class AddEditContactComponent implements OnInit {
-
   @Input()contact:any;
   Id?:string;
   contactType?:string;
@@ -17,6 +16,8 @@ export class AddEditContactComponent implements OnInit {
     this.Id=this.contact.contactId;
     this.contactType=this.contact.contactType;
   }
+
+//This is the change i madee :)
 
   addContact(){
     var val={
