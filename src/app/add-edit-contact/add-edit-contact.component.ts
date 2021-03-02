@@ -1,3 +1,4 @@
+import { DeclarationListEmitMode } from '@angular/compiler';
 import { Component, OnInit,Input } from '@angular/core';
 import {SharedService} from 'src/app/shared.service';
 
@@ -8,40 +9,47 @@ import {SharedService} from 'src/app/shared.service';
 })
 export class AddEditContactComponent implements OnInit {
   @Input()contact:any;
-  Id?:string;
+  id?:number;
+  pInfoId?:number;
+  creationTime?:Date;
   contactType?:string;
+
   constructor(private service:SharedService) { }
 
   ngOnInit(): void {
-    this.Id=this.contact.contactId;
+    this.id=this.contact.id;
+    this.pInfoId=this.contact.pInfoId;
+    this.creationTime=this.contact.creationTime;
     this.contactType=this.contact.contactType;
   }
 
 //This is the change i madee :)
 
   addContact(){
+    //create department object in JSON format
     var val={
-      Id:this.Id,
+      pInfoId:4,
+      creationTime:new Date(),
       contactType:this.contactType
     };
 
     this.service.addContact(val).subscribe(res=>{
-      alert(res.toString());
+      alert(res.toString())
     });
 
   }
 
   updateContact(){
     var val={
-      Id:this.Id,
+      id:this.id,
+      pInfoId:this.pInfoId,
+      creationTime:this.creationTime,
       contactType:this.contactType
     };
 
     this.service.updateContact(val).subscribe(res=>{
-      alert(res.toString());
+      alert(res.toString())
     });
-
-
   }
   
 

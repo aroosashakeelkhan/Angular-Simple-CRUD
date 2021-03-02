@@ -19,9 +19,6 @@ export class CrudComponent implements OnInit {
     this.refreshContactList();
   }
 
-  getAll(): void {
-    
-  }
 
   refreshContactList(){
     this.service.getContacts().subscribe(data=>{
@@ -31,8 +28,10 @@ export class CrudComponent implements OnInit {
 
   addClick(){
     this.contact={
-      Id:0,
-      contactType:""
+      id:0,
+      pInfoId:4,
+      contactType:"",
+      creationTime:""
     }
     this.ModalTitle="Add Contact";
     this.ActivateAddEditContactComp=true;
@@ -47,11 +46,20 @@ export class CrudComponent implements OnInit {
 
 
   closeClick(){
-    this.contact={
-      Id:0,
-      contactType:""
-    }
-    this.ModalTitle="Add Contact";
-    this.ActivateAddEditContactComp=true;
+    this.ActivateAddEditContactComp=false;
+    this.refreshContactList();
+  }
+
+  deleteClick(id:number){
+    //if(confirm("Are you sure?")){
+      this.service.deleteContact(id).subscribe(res=>{
+      alert(res.toString());
+      //this.service.deleteContact(id).subscribe();
+     
+    });
+    this.refreshContactList();
+  //}
+    
+
   }
 }

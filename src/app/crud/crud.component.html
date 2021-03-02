@@ -7,11 +7,11 @@
   
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
-          <button (click)="closeClick()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button (click)="closeClick()" type="button" class=" btn btn-primary btn-close" data-bs-dismiss="modal" aria-label="Close">Close</button>
         </div>
         <div class="modal-body">
           <app-add-edit-contact [contact]="contact" *ngIf='ActivateAddEditContactComp'></app-add-edit-contact>
@@ -21,11 +21,11 @@
     </div>
   </div>
 
-<button type='button' class="btn-btn light mr-1" (click)="getAll()">Get All Contacts</button>
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Contact Id</th>
+            <th>Creation Time</th>
             <th>Contact Type</th>
             <th>Option</th>
         </tr>
@@ -34,13 +34,14 @@
     <tbody>
         <tr *ngFor='let contact of ContactList'>
             <td>{{contact.id}}</td>
+            <td>{{contact.creationTime}}</td>
             <td>{{contact.contactType}}</td>
             <td>
-                <button type='button' class="btn-btn light mr-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                <button type='button' class="btn btn-primary mr-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
                 (click)="editClick(contact)" data-backdrop="static" data-keyboard="false">
                     Edit
                 </button>
-                <button type='button' class="btn-btn light mr-1">
+                <button type="button" class="btn btn-primary mr-1" (click)="deleteClick(contact.id)">
                     Delete
                 </button>
             </td>
